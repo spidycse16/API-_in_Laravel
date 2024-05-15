@@ -13,3 +13,4 @@ Route::get("/students/{id}",[StudentController::class,"studentDetails"]);
 Route::get("/getmail/{id}",[StudentController::class,"getMail"]);
 Route::post("/store",[StudentController::class,"storeData"]);
 Route::put("/update/{id}",[StudentController::class,"updateData"]);
+Route::delete("/delete/{id}",[StudentController::class,"deleteData"]);
