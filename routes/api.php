@@ -9,3 +9,6 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get("/students",[StudentController::class,'show']);
+Route::get("/students/{id}",[StudentController::class,"studentDetails"]);
+Route::get("/getmail/{id}",[StudentController::class,"getMail"]);
+Route::post("/store",[StudentController::class,"storeData"]);

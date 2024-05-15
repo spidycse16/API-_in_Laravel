@@ -25,4 +25,59 @@ class StudentController extends Controller
         }
         return response()->json($response,200);
         }
+
+        public function studentDetails($id)
+        {
+            $student=Student::find($id);
+            return $student;
+        }
+
+        public function getMail($id)
+        {
+            $user=Student::find($id);
+            if($user)
+            {
+                $email= $user->email;
+                $response=[
+                    'status'=>'1',
+                    'data'=> $email,
+                ];
+            }
+            else
+            {
+                $response=[
+                    'status'=>'0',
+                    'data'=> 'No data foound',
+                ];
+            }
+            return response()->json($response,200);
+        }
+
+        public function storeData(Request $request)
+        {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'age' => 'required|integer',
+                'phone' => 'required|string|max:11|',
+                'email' => 'required|email|max:255',
+            ]);
+
+            $temp=Student::create($validatedData);
+
+            if($temp)
+            {
+                $response=[
+                    'status'=>'1',
+                    'data'=>'Student added successfully',
+                ];
+            }
+            else
+            {
+                $response=[
+                    'status'=>'0',
+                    'data'=>'Failed to add data'
+                ];
+            }
+            return response()->json($response,200);
+        }
     }
