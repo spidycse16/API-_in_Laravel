@@ -80,4 +80,32 @@ class StudentController extends Controller
             }
             return response()->json($response,200);
         }
+
+        public function updateData(Request $request, $id)
+        {
+            $request ->validate([
+                'name' => 'required|string|max:255',
+                'age' => 'required|integer',
+                'phone' => 'required|string|max:11|',
+                'email' => 'required|email|max:255',
+            ]);
+    
+            $temp=Student::find($id);
+            if($temp)
+           { 
+            $temp->name= $request->name;
+            $temp->age= $request->age;
+            $temp->phone=$request->phone;
+            $temp->email=$request->email;
+            $temp->update();
+            $response=['status'=>'1',
+             'mesaage'=>'Data updated successfully'];
+    }
+    else
+    {
+        $response=['status'=>'1',
+    'message'=>'Couldnt update data'];
+    }
+    return response()->json($response,200);
+        }
     }
